@@ -4,9 +4,10 @@ import { IDataSocket } from '../types/IDataSocket.interface'
 
 interface IMessageBody {
 	messages: IDataSocket[]
+	status: string
 }
 
-const MessageBody: FC<IMessageBody> = ({ messages }) => {
+const MessageBody: FC<IMessageBody> = ({ messages, status }) => {
 	const navigate = useNavigate()
 	const handleLeaveChat = () => {
 		localStorage.removeItem('user')
@@ -44,6 +45,9 @@ const MessageBody: FC<IMessageBody> = ({ messages }) => {
 						</div>
 					)
 				)}
+				<div>
+					<p className='fixed bottom-[8%] text-neutral-400 ml-10'>{status}</p>
+				</div>
 			</div>
 		</>
 	)

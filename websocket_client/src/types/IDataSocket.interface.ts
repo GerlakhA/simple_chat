@@ -4,3 +4,8 @@ export interface IDataSocket {
 	socketID: string
 	name: string
 }
+
+export interface ISocketUser {
+	user: string
+	socketId: string
+}

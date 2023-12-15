@@ -11,7 +11,7 @@ function App() {
 
 	return (
 		<Routes>
-			<Route element={<Home />} path='/' />
+			<Route element={<Home socket={socket} />} path='/' />
 			<Route element={<Chat socket={socket} />} path='/chat' />
 			<Route element={<h1>404 Page Not found</h1>} path='*' />
 		</Routes>

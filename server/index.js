@@ -11,6 +11,8 @@ const PORT = 3333
 
 app.use(cors({ origin: 'http://localhost:5173' }))
 
+const users = []
+
 io.on('connection', socket => {
 	console.log(`${socket.id} user connected`)
 
@@ -18,6 +20,13 @@ io.on('connection', socket => {
 		io.emit('response', data)
 		console.log(data)
 	})
+
+	socket.on('newUser', data => {
+		users.push(data)
+		io.emit('responseNewUser', users)
+	})
+
+	socket.on('typing', data => socket.broadcast.emit('responseTyping', data))
 
 	io.on('disconnect', () => {
 		console.log(`${socket.id} disconnect`)

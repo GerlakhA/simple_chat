@@ -24,6 +24,9 @@ const MessageInput: FC<IMessageInput> = ({ socket }) => {
 		setMessage('')
 	}
 
+	const isTyping = () =>
+		socket.emit('typing', `${localStorage.getItem('user')} is typing...`)
+
 	return (
 		<form onSubmit={handleSubmit} className='flex gap-x-4 w-[90%] p-2 ml-10'>
 			<input
@@ -31,7 +34,8 @@ const MessageInput: FC<IMessageInput> = ({ socket }) => {
 				value={message}
 				onChange={e => setMessage(e.target.value)}
 				placeholder='Enter message...'
-				className='text-white focus:outline-none bg-gray-500 p-2 rounded-lg w-full '
+				className='text-white focus:outline-none bg-gray-500 p-2 rounded-lg w-full'
+				onKeyDown={isTyping}
 			/>
 			<button
 				type='submit'

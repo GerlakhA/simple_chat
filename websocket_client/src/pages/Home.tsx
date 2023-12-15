@@ -1,7 +1,8 @@
 import { ChangeEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { Socket } from 'socket.io-client'
 
-const Home = () => {
+const Home = ({ socket }: { socket: Socket }) => {
 	const [user, setUser] = useState('')
 	const navigate = useNavigate()
 
@@ -11,6 +12,7 @@ const Home = () => {
 			setUser('')
 		}
 		localStorage.setItem('user', user)
+		socket.emit('newUser', { user, socketId: socket.id })
 		navigate('/chat')
 	}
 
